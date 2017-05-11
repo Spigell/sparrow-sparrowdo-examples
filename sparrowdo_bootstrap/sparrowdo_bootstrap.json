@@ -1,0 +1,14 @@
+[
+ { "plugin" : "rakudo-install", 
+  "task" : "install Rakudo and zef", 
+  "data" : {  } 
+ }, 
+
+ { "plugin" : "bash", 
+  "task" : 
+  "run bash: Installing Sparrowdo", 
+  "data" : { 
+    "command" : "export PATH=$PATH:/opt/rakudo/bin && zef install Sparrowdo" 
+  } 
+ }
+]

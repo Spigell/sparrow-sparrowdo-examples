@@ -1,0 +1,5 @@
+task-run 'install Rakudo', 'rakudo-install';
+
+bash(q:to/BOOTSTRAP/);
+  export PATH=$PATH:/opt/rakudo/bin && zef install Sparrowdo
+BOOTSTRAP
