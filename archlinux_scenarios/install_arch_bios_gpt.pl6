@@ -3,7 +3,7 @@
 # pacman -Sy --noconfirm gcc make cpanminus && cpanm -n Sparrow
 # passwd
 # visudo 
-# This is example for UEFI-GPT install.
+# This is example for BIOS-GPT install.
 # !!! WARNING. This example may wipe date from disk! 
 
 my $disk = '/dev/sda';
@@ -11,8 +11,8 @@ my $disk = '/dev/sda';
 bash "parted $disk mklabel gpt";
 bash "parted $disk mkpart P1 2Mib 9Gib";
 bash "parted $disk set 1 lvm on";
-bash "parted $disk mkpart ESP fat32 9Gib 9513Mib";
-bash "parted $disk set 2 boot on";
+bash "parted $disk mkpart P2 9Gib 9302Mib";
+bash "parted $disk set 2 bios_grub on";
 
 task-run "create main lv", "lvm", %(
   action    => 'create',
@@ -26,6 +26,7 @@ task-run "Install Archlinux", "archlinux-install", %(
   system => %(
     hostname  => 'myArchlinux',
     root-pass => 'koteika42',
+	timezone  => 'Europe/Moscow',
   ),
   disk => %(
     lvm  => %( 
@@ -36,15 +37,14 @@ task-run "Install Archlinux", "archlinux-install", %(
   bootloader => %( 
     grub   => %( 
       install   => 'true',
-      type      => 'efi',
+      type      => 'bios',
       target    => '/dev/sda',
-      partition => '/dev/sda2',
     ),
   ),
   postinstall => %(
     packages        => ('openssh sudo networkmanager'),
     enable-services => ('sshd NetworkManager dhcpcd')
-  )
+  ),
 );
 
 # add my public ssh key because by default ssh's behavior doesn't accept access by root password.
