@@ -24,7 +24,9 @@ Main command:
 
 ## Files
 install_arch_uefi_gtp.pl6 - For UEFI-GTP installation.
+
 install_arch_bios_gtp.pl6 - For BIOS-GTP installation.
+
 install_arch_uefi_gtp_raw.pl6 - For UEFI-GTP (without lvm) installation.
 
-In `additional` directory lying examples for further provising.
+In additional directory lying examples for further provising.

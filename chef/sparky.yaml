@@ -1,0 +1,4 @@
+sparrowdo:
+  host: '127.0.0.1'
+  ssh_port: '4445'
+  ssh_user: 'vagrant'
