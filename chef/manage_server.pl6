@@ -21,6 +21,6 @@ module_run 'Chef::Manager', %(
   email     => 'spigell@tomatonetwork.com',
   name      => 'Spigell',
   last-name => '7 Th',
-  password  => 'rjnbrbvjnbrb',
+  password  => '12345',
   org       => 'tomato'
 );
