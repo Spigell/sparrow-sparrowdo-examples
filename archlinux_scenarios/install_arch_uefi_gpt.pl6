@@ -8,12 +8,33 @@
 
 my $disk = '/dev/sda';
 
-bash "parted $disk mklabel gpt";
-bash "parted $disk mkpart P1 2Mib 9Gib";
-bash "parted $disk set 1 lvm on";
-bash "parted $disk mkpart ESP fat32 9Gib 9513Mib";
-bash "parted $disk set 2 boot on";
 
+
+task_run 'create gpt table force', 'disk-partitioner', %(
+  table => %(
+    type => 'gpt',
+    target => "$disk",
+    recreate => 'true'
+  )
+);
+
+task_run 'create main lvm', 'disk-partitioner', %(
+  partition => %(
+    target => "$disk",
+    start  => '2M',
+    end    => '15Gib',
+	flags  => 'lvm'
+  )
+);
+
+task_run 'create boot partition', 'disk-partitioner', %(
+  partition => %(
+    target => "$disk",
+    start  => '15Gib',
+    end    => '16000Mib',
+	flags  => 'boot'
+  )
+);
 task-run "create main lv", "lvm", %(
   action    => 'create',
   partition => '/dev/sda1',
