@@ -1,5 +1,5 @@
 task-run 'install Rakudo', 'rakudo-install', %(
-   url => 'https://github.com/nxadm/rakudo-pkg/releases/download/2017.06/perl6-rakudo-moarvm-CentOS7.3.1611-20170600-01.x86_64.rpm'
+   url => 'https://github.com/nxadm/rakudo-pkg/releases/download/2017.09.1/perl6-rakudo-moarvm-CentOS7.3.1611-20170900-01.x86_64.rpm'
 );
 bash(q:to/BOOTSTRAP/);
   export PATH=$PATH:/opt/rakudo/bin && zef install Sparrowdo
